@@ -13,7 +13,7 @@ const Header = () => {
         </span>
       </div>
       <div className="h-full items-center justify-center flex font-mono">
-        <a href="https://github.com/lemesvini" target="_blank">by vinicius</a>
+        <a href="https://github.com/lemesvini" target="_blank">by vini</a>
       </div>
     </div>
   );

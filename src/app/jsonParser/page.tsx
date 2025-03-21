@@ -24,7 +24,6 @@ export default function Parser() {
       setParsedJson(parsed);
       setError(null);
     } catch (err) {
-        console.log(err)
       setParsedJson(null);
       setError(`Invalid JSON`);
     }
