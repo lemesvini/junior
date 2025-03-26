@@ -1,26 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import juniorPng from "../../../public/JUNIOR.png"
+import Editor from '@monaco-editor/react';
+import juniorPng from "../../../public/JUNIOR.png";
 
 export default function Parser() {
   const [jsonInput, setJsonInput] = useState('');
   const [parsedJson, setParsedJson] = useState(null);
   const [error, setError] = useState<string | null>(null);
 
-  const handleInputChange = (e: any) => {
-    const value = e.target.value;
-    setJsonInput(value);
+  const handleEditorChange = (value: string | undefined) => {
+    const inputValue = value || '';
+    setJsonInput(inputValue);
     
     try {
-      if (!value.trim()) {
+      if (!inputValue.trim()) {
         setParsedJson(null);
         setError(null);
         return;
       }
       
-      const parsed = JSON.parse(value);
+      const parsed = JSON.parse(inputValue);
       setParsedJson(parsed);
       setError(null);
     } catch (err) {
@@ -37,7 +38,25 @@ export default function Parser() {
             type="text"
             className="w-full bg-transparent border-none outline-none text-white font-mono"
             value={jsonInput}
-            onChange={handleInputChange}
+            onChange={(e) => {
+              const value = e.target.value;
+              setJsonInput(value);
+              
+              try {
+                if (!value.trim()) {
+                  setParsedJson(null);
+                  setError(null);
+                  return;
+                }
+                
+                const parsed = JSON.parse(value);
+                setParsedJson(parsed);
+                setError(null);
+              } catch (err) {
+                setParsedJson(null);
+                setError(`Invalid JSON`);
+              }
+            }}
             placeholder="Enter JSON here..."
           />
           <div className='px-2 hover:scale-[1.1] hover:cursor-pointer' onClick={() => history.back()}>
@@ -50,9 +69,16 @@ export default function Parser() {
           {error ? (
             <div className="text-red-400">{error}</div>
           ) : parsedJson ? (
-            <pre className="whitespace-pre-wrap break-words">
-              {JSON.stringify(parsedJson, null, 2)}
-            </pre>
+            <Editor
+              height="100%"
+              defaultLanguage="json"
+              value={JSON.stringify(parsedJson, null, 2)}
+              theme='hc-black'
+              options={{
+                readOnly: true,
+                minimap: { enabled: false },
+              }}
+            />
           ) : (
             <p className="text-gray-400">No valid JSON parsed yet</p>
           )}
