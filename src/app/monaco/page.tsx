@@ -7,6 +7,7 @@ import Editor, { OnMount } from "@monaco-editor/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCode,
+  faDatabase,
   faFloppyDisk,
   faFolderOpen,
   faPlay,
@@ -130,6 +131,20 @@ export default function Edit() {
                 <p className="text-gray-300">TypeScript</p>
               </div>
             </div>
+            <div
+              className="bg-black p-6 rounded-lg w-64 h-48 flex items-center justify-center cursor-pointer hover:bg-transparent hover:border-2 transition-colors"
+              onClick={() => {
+                setLang("sql");
+                setModalOpen(false);
+              }}
+            >
+              <div className="text-center">
+                <div className="text-8xl font text-white mb-4">
+                  <FontAwesomeIcon icon={faDatabase} />
+                </div>
+                <p className="text-gray-300">SQL</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -162,21 +177,29 @@ export default function Edit() {
                 onClick={() => setModalOpen(true)}
               >
                 <FontAwesomeIcon
-                  icon={lang ? (lang === "javascript" ? faJs : faReact) : faCode}
+                  icon={lang ? 
+                    (lang === "javascript" ? faJs : 
+                     lang === "typescript" ? faReact : 
+                     lang === "sql" ? faDatabase : 
+                     faCode) : 
+                    faCode}
                   className={`
                     ${lang === "javascript" ? "text-yellow-500" : ""}
                     ${lang === "typescript" ? "text-blue-500" : ""}
+                    ${lang === "sql" ? "text-white" : ""}
                   `}
                 />
                 <div
                   className={`
                     ${lang === "javascript" ? "text-yellow-500" : ""}
                     ${lang === "typescript" ? "text-blue-500" : ""}
+                    ${lang === "sql" ? "text-white" : ""}
                   `}
                 >
                   {lang === "" && "Set Lang"}
                   {lang === "javascript" && "JavaScript"}
                   {lang === "typescript" && "TypeScript"}
+                  {lang === "sql" && "SQL"}
                 </div>
               </div>
             </div>
@@ -201,9 +224,7 @@ export default function Edit() {
           <Editor
             height="100%"
             width="100%"
-            language={
-              lang === "typescript" ? "typescript" : "javascript"
-            }
+            language={lang || 'javascript'}
             defaultValue="// happy coding!"
             theme="hc-black"
             onMount={handleEditorDidMount}
