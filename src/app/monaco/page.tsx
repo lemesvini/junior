@@ -143,10 +143,6 @@ export default function Edit() {
         <div className="bg-black text-white rounded-xl p-4 h-16 items-center flex justify-between">
           <div className="font-mono flex flex-row justify-between items-center w-full">
             <div className="grow flex flex-row space-x-8">
-              <div className="flex flex-row space-x-2 text-gray-500 items-center px-6 py-2 rounded-lg">
-                <FontAwesomeIcon icon={faPlay} />
-                <div>Run</div>
-              </div>
               <div 
                 className="flex flex-row space-x-2 items-center hover:bg-gray-950 px-6 py-2 rounded-lg hover:cursor-pointer"
                 onClick={handleOpenClick}
