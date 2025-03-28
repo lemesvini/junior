@@ -31,7 +31,7 @@ export default function Parser() {
   };
 
   return (
-    <div className="hidden lg:flex h-[100dvh] w-[100dvw] bg-[#1E1E1E] flex-col space-y-4 p-4">
+    <div className="flex h-[100dvh] w-[100dvw] bg-[#1E1E1E] flex-col space-y-4 p-4">
       <div className="bg-black text-white rounded-xl p-4 h-16 items-center flex justify-between">
         <div className="font-mono flex flex-row justify-between w-full">
           <input
