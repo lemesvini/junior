@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import JuniorPNG from "../../public/JUNIOR.png";
 
 const Footer = () => {
@@ -16,11 +16,11 @@ const Footer = () => {
               width={80}
               height={30}
             />
-            <p className="text-gray-400">© 2025 Junior. All rights reserved.</p>
+            <p className="text-gray-400">© 2025 Junior. All rights reserved. <a href="https://github.com/lemesvini" target="_blank">By Vini.</a></p>
           </div>
           <div className="flex space-x-6">
-            <FontAwesomeIcon icon={faGithub} className="text-gray-400 hover:text-white cursor-pointer text-xl" />
-            <FontAwesomeIcon icon={faTwitter} className="text-gray-400 hover:text-white cursor-pointer text-xl" />
+            <a href="https://github.com/lemesvini" target="_blank"><FontAwesomeIcon icon={faGithub} className="text-gray-400 hover:text-white cursor-pointer text-xl" /></a>
+            <a href="https://linkedin.com/in/vinicius-lemes-ds" target="_blank"><FontAwesomeIcon icon={faLinkedin} className="text-gray-400 hover:text-white cursor-pointer text-xl" /></a>
           </div>
         </div>
       </div>
