@@ -31,7 +31,7 @@ const Hero = ({ setLivemodal }: HeroProps) => {
             <span className="text-white">Tools</span>
           </h1>
           <p className="text-gray-400 text-lg md:text-xl font-mono max-w-lg">
-            A powerful open-source platform {'that\'s'} completely free, featuring collaborative coding, real-time pair programming, and JSON tools for everyone to use and contribute.
+            A powerful tool featuring real-time collaborative coding, a JSON parser and a Monaco-based code editor. 
           </p>
           <div className="flex gap-4">
             <motion.button

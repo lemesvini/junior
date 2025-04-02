@@ -420,7 +420,7 @@ function LiveCodeContent() {
   return (
     <>
       {modalOpen && <LangModal />}
-      <div className="hidden sm:flex h-[100dvh] w-[100dvw] bg-[#1E1E1E] flex-col space-y-4 p-4">
+      <div className="flex h-[100dvh] w-[100dvw] bg-[#1E1E1E] flex-col space-y-4 p-4">
         <div className="bg-black text-white rounded-xl p-4 h-16 items-center flex justify-between">
           <div className="font-mono flex flex-row justify-between items-center w-full">
             <div className="grow flex flex-row space-x-8">
@@ -442,7 +442,7 @@ function LiveCodeContent() {
               
               {/* Collaboration status and copy code button */}
               {isCollaborating && sessionCode && (
-                <div className="flex flex-row items-center text-green-400 px-6 py-2 rounded-lg">
+                <div className="hidden lg:flex flex-row items-center text-green-400 px-6 py-2 rounded-lg">
                   <FontAwesomeIcon icon={faUsers} className="mr-2" />
                   <div className="mr-2">{collaborationStatus}</div>
                   <button 
@@ -456,7 +456,7 @@ function LiveCodeContent() {
               )}
             </div>
             <div
-                className="flex flex-row space-x-2 items-center hover:bg-gray-950 px-6 py-2 rounded-lg hover:cursor-pointer"
+                className="hidden lg:flex flex-row space-x-2 items-center hover:bg-gray-950 px-6 py-2 rounded-lg hover:cursor-pointer"
                 onClick={() => setModalOpen(true)}
               >
                 <FontAwesomeIcon
@@ -478,7 +478,7 @@ function LiveCodeContent() {
                 </div>
               </div>
             <div 
-                className="flex flex-row space-x-2 text-white items-center px-6 py-2 rounded-lg hover:bg-gray-950 hover:text-white hover:cursor-pointer"
+                className="hidden flex flex-row space-x-2 text-white items-center px-6 py-2 rounded-lg hover:bg-gray-950 hover:text-white hover:cursor-pointer"
                 onClick={forceSaveToFirebase}
               >
                 <FontAwesomeIcon icon={faPlay} />
