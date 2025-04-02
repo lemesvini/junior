@@ -15,7 +15,7 @@ interface TestimonialsProps {
 
 const Testimonials = ({ testimonials }: TestimonialsProps) => {
   return (
-    <section className="py-20 px-4">
+    <section className="hidden py-20 px-4">
       <div className="container mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
           Trusted by Developers

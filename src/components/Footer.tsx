@@ -16,7 +16,7 @@ const Footer = () => {
               width={80}
               height={30}
             />
-            <p className="text-gray-400">© 2024 Junior. All rights reserved.</p>
+            <p className="text-gray-400">© 2025 Junior. All rights reserved.</p>
           </div>
           <div className="flex space-x-6">
             <FontAwesomeIcon icon={faGithub} className="text-gray-400 hover:text-white cursor-pointer text-xl" />

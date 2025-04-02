@@ -42,12 +42,12 @@ const LiveModal = ({ setLivemodal }: LiveModalProps) => {
         </div>
 
         <div className="space-y-4">
-          <div className="flex space-x-2">
+          <div className="flex space-x-2 bg-white/18 p-1 rounded-lg">
             <button
               className={`flex-1 py-2 px-4 rounded-lg font-mono text-sm transition-colors ${
                 selectedOption === "button1"
-                  ? "bg-blue-500 text-white"
-                  : "bg-white/5 text-gray-400 hover:bg-white/10"
+                  ? "bg-black text-white"
+                  : "text-gray-300 hover:bg-white/10 hover:cursor-pointer"
               }`}
               onClick={() => setSelectedOption("button1")}
             >
@@ -56,8 +56,8 @@ const LiveModal = ({ setLivemodal }: LiveModalProps) => {
             <button
               className={`flex-1 py-2 px-4 rounded-lg font-mono text-sm transition-colors ${
                 selectedOption === "button2"
-                  ? "bg-blue-500 text-white"
-                  : "bg-white/5 text-gray-400 hover:bg-white/10"
+                  ? "bg-black text-white"
+                  : " text-gray-300 hover:bg-white/10 hover:cursor-pointer"
               }`}
               onClick={() => setSelectedOption("button2")}
             >
@@ -68,7 +68,7 @@ const LiveModal = ({ setLivemodal }: LiveModalProps) => {
           {selectedOption === "button1" ? (
             <button
               onClick={() => routeCollaboration('new', '')}
-              className="w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-mono text-sm hover:opacity-90 transition-opacity"
+              className="hover:cursor-pointer w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-mono text-sm hover:opacity-90 transition-opacity"
             >
               Start New Session
             </button>
@@ -101,7 +101,7 @@ const LiveModal = ({ setLivemodal }: LiveModalProps) => {
               </div>
               <button
                 onClick={() => routeCollaboration('join', inputValue)}
-                className="w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-mono text-sm hover:opacity-90 transition-opacity"
+                className="hover:cursor-pointer w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-mono text-sm hover:opacity-90 transition-opacity"
               >
                 Join Session
               </button>
