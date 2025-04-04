@@ -46,6 +46,10 @@ function LiveCodeContent() {
   const lastSavedContentRef = useRef<string>("// happy coding!");
   const initialLoadCompleteRef = useRef(false);
 
+  useEffect(() => {
+    document.title = "Junior | Live Collab";
+  }, []);
+
   // Initialize session
   useEffect(() => {
     if (!type) return;

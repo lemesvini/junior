@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, ChangeEvent } from "react";
+import { useRef, useState, ChangeEvent, useEffect } from "react";
 import Image from "next/image";
 import juniorPng from "../../../public/JUNIOR.png";
 import Editor, { OnMount } from "@monaco-editor/react";
@@ -13,7 +13,7 @@ import {
   faPlay,
   faTerminal,
 } from "@fortawesome/free-solid-svg-icons";
-import { faJs, faReact } from "@fortawesome/free-brands-svg-icons";
+import { faJs, faReact, faJava } from "@fortawesome/free-brands-svg-icons";
 import type { editor } from 'monaco-editor';
 
 export default function Edit() {
@@ -22,6 +22,10 @@ export default function Edit() {
   const [modalOpen, setModalOpen] = useState(false);
   const [lang, setLang] = useState("");
   const [fileName, setFileName] = useState("untitled");
+
+  useEffect(() => {
+    document.title = "Junior | Code Editor";
+  }, []);
 
   const handleEditorDidMount: OnMount = (editor) => {
     editorRef.current = editor;
@@ -44,6 +48,12 @@ export default function Edit() {
         setLang('typescript');
       } else if (extension === 'js' || extension === 'jsx') {
         setLang('javascript');
+      } else if (extension === 'c') {
+        setLang('c');
+      } else if (extension === 'cpp' || extension === 'cc' || extension === 'h' || extension === 'hpp') {
+        setLang('cpp');
+      } else if (extension === 'java') {
+        setLang('java');
       }
     }
 
@@ -65,7 +75,12 @@ export default function Edit() {
     
     const content = editorRef.current.getValue();
     
-    const extension = lang === 'typescript' ? '.ts' : '.js';
+    let extension = '.js';
+    if (lang === 'typescript') extension = '.ts';
+    else if (lang === 'c') extension = '.c';
+    else if (lang === 'cpp') extension = '.cpp';
+    else if (lang === 'java') extension = '.java';
+    else if (lang === 'sql') extension = '.sql';
     
     const mimeType = 'text/plain';
     const blob = new Blob([content], { type: mimeType });
@@ -84,65 +99,111 @@ export default function Edit() {
   const LangModal = () => {
     return (
       <div
-        className="absolute flex z-10 w-full h-[100dvh] items-center justify-center"
+        className="fixed inset-0 flex z-10 w-full h-[100dvh] items-center justify-center"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
       >
-        <div className="relative w-3/5 h-2/5 min-h-[400px] min-w-[600px] bg-[#1E1E1E] rounded-lg flex flex-col items-center justify-center space-y-16">
+        <div className="relative w-11/12 md:w-4/5 lg:w-3/5 max-w-3xl max-h-[90vh] bg-[#1E1E1E] rounded-lg flex flex-col items-center p-8 overflow-y-auto">
           <button
-            className="absolute top-4 right-4 text-white hover:text-gray-400 transition-colors"
+            className="sticky top-0 float-right text-white hover:text-gray-400 transition-colors self-end"
             onClick={() => setModalOpen(false)}
           >
-            <span className="text-red-500 text-xl mr-2 hover:cursor-pointer items-center">
+            <span className="text-red-500 text-2xl hover:cursor-pointer items-center">
               &times;
             </span>
           </button>
-
-          <div className="font-mono font-black text-white text-2xl">
+  
+          <div className="font-mono font-black text-white text-xl md:text-2xl mb-8 text-center">
             Available Languages:
           </div>
-
-          <div className="flex space-x-8 items-center justify-center">
+  
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
             <div
-              className="bg-black p-6 rounded-lg w-64 h-48 flex items-center justify-center cursor-pointer hover:bg-transparent hover:border-2 transition-colors"
+              className="bg-black p-4 rounded-lg flex items-center justify-center cursor-pointer hover:bg-transparent hover:border-2 border-2 border-transparent transition-colors h-40"
               onClick={() => {
                 setLang("javascript");
                 setModalOpen(false);
               }}
             >
               <div className="text-center">
-                <div className="text-8xl font text-yellow-500 mb-4">
+                <div className="text-5xl md:text-6xl lg:text-7xl text-yellow-500 mb-4">
                   <FontAwesomeIcon icon={faJs} />
                 </div>
                 <p className="text-gray-300">JavaScript</p>
               </div>
             </div>
-
+  
             <div
-              className="bg-black p-6 rounded-lg w-64 h-48 flex items-center justify-center cursor-pointer hover:bg-transparent hover:border-2 transition-colors"
+              className="bg-black p-4 rounded-lg flex items-center justify-center cursor-pointer hover:bg-transparent hover:border-2 border-2 border-transparent transition-colors h-40"
               onClick={() => {
                 setLang("typescript");
                 setModalOpen(false);
               }}
             >
               <div className="text-center">
-                <div className="text-8xl font text-blue-500 mb-4">
+                <div className="text-5xl md:text-6xl lg:text-7xl text-blue-500 mb-4">
                   <FontAwesomeIcon icon={faReact} />
                 </div>
                 <p className="text-gray-300">TypeScript</p>
               </div>
             </div>
+  
             <div
-              className="bg-black p-6 rounded-lg w-64 h-48 flex items-center justify-center cursor-pointer hover:bg-transparent hover:border-2 transition-colors"
+              className="bg-black p-4 rounded-lg flex items-center justify-center cursor-pointer hover:bg-transparent hover:border-2 border-2 border-transparent transition-colors h-40"
               onClick={() => {
                 setLang("sql");
                 setModalOpen(false);
               }}
             >
               <div className="text-center">
-                <div className="text-8xl font text-white mb-4">
+                <div className="text-5xl md:text-6xl lg:text-7xl text-white mb-4">
                   <FontAwesomeIcon icon={faDatabase} />
                 </div>
                 <p className="text-gray-300">SQL</p>
+              </div>
+            </div>
+
+            <div
+              className="bg-black p-4 rounded-lg flex items-center justify-center cursor-pointer hover:bg-transparent hover:border-2 border-2 border-transparent transition-colors h-40"
+              onClick={() => {
+                setLang("c");
+                setModalOpen(false);
+              }}
+            >
+              <div className="text-center">
+                <div className="text-5xl md:text-6xl lg:text-7xl text-gray-300 mb-4">
+                  <FontAwesomeIcon icon={faCode} />
+                </div>
+                <p className="text-gray-300">C</p>
+              </div>
+            </div>
+
+            <div
+              className="bg-black p-4 rounded-lg flex items-center justify-center cursor-pointer hover:bg-transparent hover:border-2 border-2 border-transparent transition-colors h-40"
+              onClick={() => {
+                setLang("cpp");
+                setModalOpen(false);
+              }}
+            >
+              <div className="text-center">
+                <div className="text-5xl md:text-6xl lg:text-7xl text-blue-400 mb-4">
+                  <FontAwesomeIcon icon={faCode} />
+                </div>
+                <p className="text-gray-300">C++</p>
+              </div>
+            </div>
+
+            <div
+              className="bg-black p-4 rounded-lg flex items-center justify-center cursor-pointer hover:bg-transparent hover:border-2 border-2 border-transparent transition-colors h-40"
+              onClick={() => {
+                setLang("java");
+                setModalOpen(false);
+              }}
+            >
+              <div className="text-center">
+                <div className="text-5xl md:text-6xl lg:text-7xl text-orange-500 mb-4">
+                  <FontAwesomeIcon icon={faJava} />
+                </div>
+                <p className="text-gray-300">Java</p>
               </div>
             </div>
           </div>
@@ -180,6 +241,7 @@ export default function Edit() {
                   icon={lang ? 
                     (lang === "javascript" ? faJs : 
                      lang === "typescript" ? faReact : 
+                     lang === "java" ? faJava :
                      lang === "sql" ? faDatabase : 
                      faCode) : 
                     faCode}
@@ -187,6 +249,9 @@ export default function Edit() {
                     ${lang === "javascript" ? "text-yellow-500" : ""}
                     ${lang === "typescript" ? "text-blue-500" : ""}
                     ${lang === "sql" ? "text-white" : ""}
+                    ${lang === "c" ? "text-gray-300" : ""}
+                    ${lang === "cpp" ? "text-blue-400" : ""}
+                    ${lang === "java" ? "text-orange-500" : ""}
                   `}
                 />
                 <div
@@ -194,12 +259,18 @@ export default function Edit() {
                     ${lang === "javascript" ? "text-yellow-500" : ""}
                     ${lang === "typescript" ? "text-blue-500" : ""}
                     ${lang === "sql" ? "text-white" : ""}
+                    ${lang === "c" ? "text-gray-300" : ""}
+                    ${lang === "cpp" ? "text-blue-400" : ""}
+                    ${lang === "java" ? "text-orange-500" : ""}
                   `}
                 >
                   {lang === "" && "Set Lang"}
                   {lang === "javascript" && "JavaScript"}
                   {lang === "typescript" && "TypeScript"}
                   {lang === "sql" && "SQL"}
+                  {lang === "c" && "C"}
+                  {lang === "cpp" && "C++"}
+                  {lang === "java" && "Java"}
                 </div>
               </div>
             </div>
@@ -217,7 +288,7 @@ export default function Edit() {
             type="file" 
             ref={fileInputRef}
             style={{ display: 'none' }} 
-            accept=".js,.jsx,.ts,.tsx"
+            accept=".js,.jsx,.ts,.tsx,.c,.cpp,.cc,.h,.hpp,.java"
             onChange={handleFileChange}
           />
           
