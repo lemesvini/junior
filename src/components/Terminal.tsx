@@ -48,11 +48,11 @@ const TerminalText = () => {
   }, [currentLine]);
 
   return (
-    <div className="font-mono space-y-2">
+    <div className="font-mono text-xl space-y-2">
       {displayedLines.map((line, index) => (
         <p 
           key={index} 
-          className={lines[index].type === "command" ? "text-green-500" : "text-white"}
+          className={lines[index].type === "command" ? "text-green-500" : "text-white" }
         >
           {line}
           {index === displayedLines.length - 1 && !isTyping && (

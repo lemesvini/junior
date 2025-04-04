@@ -28,10 +28,10 @@ const Hero = ({ setLivemodal }: HeroProps) => {
             <br />
             <span className="gradient-text">Development</span>
             <br />
-            <span className="text-white">Tools</span>
+            <span className="text-white">Tool</span>
           </h1>
           <p className="text-gray-400 text-lg md:text-xl font-mono max-w-lg">
-            A powerful tool featuring real-time collaborative coding, a JSON parser and a Monaco-based code editor. 
+            Real-time collaborative coding, JSON parser and a Monaco-based code editor with file support. 
           </p>
           <div className="flex gap-4">
             <motion.button

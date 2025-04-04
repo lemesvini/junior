@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Editor from '@monaco-editor/react';
 import juniorPng from "../../../public/JUNIOR.png";
@@ -9,6 +9,10 @@ export default function Parser() {
   const [jsonInput, setJsonInput] = useState('');
   const [parsedJson, setParsedJson] = useState(null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    document.title = "Junior | JSON Tool";
+  }, []);
 
   const handleEditorChange = (value: string | undefined) => {
     const inputValue = value || '';
@@ -64,7 +68,7 @@ export default function Parser() {
           </div>
         </div>
       </div>
-      <div className="flex w-full bg-black rounded-xl grow text-white flex-row p-4 overflow-hidden">
+      <div className="flex w-full bg-black rounded-xl grow text-white flex-row p-2 overflow-hidden">
         <div className="flex w-full space-y-5 font-mono overflow-auto no-scrollbar">
           {error ? (
             <div className="text-red-400">{error}</div>
@@ -75,8 +79,8 @@ export default function Parser() {
               value={JSON.stringify(parsedJson, null, 2)}
               theme='hc-black'
               options={{
-                readOnly: true,
-                minimap: { enabled: false },
+                readOnly: false,
+                minimap: { enabled: true },
               }}
             />
           ) : (

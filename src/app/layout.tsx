@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const firaCode = Fira_Code({ subsets: ['latin'], variable: '--font-fira-code' });
 
 export const metadata: Metadata = {
-  title: "Junior - Modern Development Environment",
+  title: "Junior",
   description: "A powerful, collaborative coding environment with real-time features",
   icons: {
     icon: '/favicon.ico',
