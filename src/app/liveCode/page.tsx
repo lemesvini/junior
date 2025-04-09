@@ -57,8 +57,8 @@ function LiveCodeContent() {
     const db = getDatabase();
     
     if (type === 'new') {
-      // Generate a new 9-digit code
-      const newCode = Math.floor(100000000 + Math.random() * 900000000).toString();
+      // Generate a new 4-digit code
+      const newCode = Math.floor(1000 + Math.random() * 9000).toString();
       setSessionCode(newCode);
       
       // Create a new document in Firebase
